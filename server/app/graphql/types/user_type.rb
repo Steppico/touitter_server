@@ -5,6 +5,7 @@ module Types
     field :email, String, null: false
     field :password, String, null: false
     field :email_confirmed, Boolean, null: false
-    field :confirm_token, String, null: false
+    field :token, String, null: false
+    field :bio, String, null: false
   end
 end

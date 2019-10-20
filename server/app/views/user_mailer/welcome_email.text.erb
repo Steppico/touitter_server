@@ -3,7 +3,7 @@ Hello <%= @user.username %>,
 Welcome to tOUItter.
 Click the link below to confirm your email and get access to the website.
 
-<%= "http://localhost:3001/confirmLogin" %>
+<%= "http://localhost:3001/#/confirm?token=#{@user.token}" %>
 
 Thank you!
 

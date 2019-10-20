@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(version: 2019_10_17_080852) do
     t.string "email"
     t.string "password_digest"
     t.boolean "email_confirmed"
-    t.string "confirm_token"
+    t.string "token"
+    t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
