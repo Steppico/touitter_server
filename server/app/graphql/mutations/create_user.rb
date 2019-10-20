@@ -13,12 +13,13 @@ module Mutations
     type Types::UserType
 
     def resolve(username: nil, auth_provider: nil, email_confirmed: false)
-        User.create!(
+        @user = User.create!(
           username: username,
           email: auth_provider&.[](:email)&.[](:email),
           password: auth_provider&.[](:email)&.[](:password),
           email_confirmed: email_confirmed
         )
+        UserMailer.with(user: @user).welcome_email.deliver_now
     end
   end
 end
