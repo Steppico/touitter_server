@@ -10,7 +10,8 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      session: session,
+      current_user: current_user
     }
     result = ServerSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -20,6 +21,19 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+
+  def current_user
+    return unless session[:token]
+    # token = session[:token] 
+    token = JWT.decode session[:token], Rails.application.credentials.secret_key_base, true, { algorithm: 'HS256' }
+    puts "TOEKEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEN #{token}"
+    user_id = token.gsub('user-id:', '').to_i
+    puts "OMMIODDDIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO #{user_id}"
+    User.find_by(id:user_id)
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    nil
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)

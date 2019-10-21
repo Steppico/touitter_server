@@ -1,24 +1,38 @@
-# README
+# tOUItter, Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Shippio's technical assignment.
+This is the server-side. Please head over [here](https://github.com/Steppico/touitter/tree/master/touitter_client) for the client side.
 
-Things you may want to cover:
+## Project setup
 
-* Ruby version
+```
+bundle install
+```
 
-* System dependencies
+### Migration
 
-* Configuration
+```
+rails db:migrate
+```
 
-* Database creation
+### Development
 
-* Database initialization
+```
+rails s
+```
 
-* How to run the test suite
+## How to start
 
-* Services (job queues, cache servers, search engines, etc.)
+The page will load at http://localhost:3000.
 
-* Deployment instructions
+## NB
 
-* ...
+the mailer service will work only setting an ENV file, on the server side, to sendgrid's user and password.
+Please check the email sent you to have them.
+
+How to setup this ENV file:
+
+1. create a file named "local_env.yml" in ~/config path.
+2. insert the required data as such:
+   SENDGRID_USER: "user"
+   SENDGRID_PASS: "password"
