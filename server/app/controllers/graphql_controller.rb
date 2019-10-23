@@ -26,10 +26,8 @@ class GraphqlController < ApplicationController
   def current_user
     return unless session[:token]
     # token = session[:token] 
-    token = JWT.decode session[:token], Rails.application.credentials.secret_key_base, true, { algorithm: 'HS256' }
-    puts "TOEKEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEN #{token}"
+    token = JWT.decode session[:token], "session_test", true, { algorithm: 'HS256' }
     user_id = token.gsub('user-id:', '').to_i
-    puts "OMMIODDDIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO #{user_id}"
     User.find_by(id:user_id)
   rescue ActiveSupport::MessageVerifier::InvalidSignature
     nil
